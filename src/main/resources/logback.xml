@@ -31,8 +31,19 @@
         </encoder>
     </appender>
 
+    <appender name="WEBOUT" class="com.github.alexvictoor.weblogback.BrowserConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+        <port>8765</port> <!-- Optional, this is the port on which the HTTP SSE server will listen. Default port is 8765 -->
+        <active>true</active> <!-- Optional, if false the appender is disabled. Default value is true -->
+        <buffer>1</buffer> <!-- Optional, the size of a replay buffer for late joiners that will receive already emmited messages -->
+    </appender>
+
     <root level="INFO" additivity="false">
-        <appender-ref ref="REDMINE"/>
+        <!--<appender-ref ref="REDMINE"/>-->
+        <appender-ref ref="WEBOUT"/>
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>
